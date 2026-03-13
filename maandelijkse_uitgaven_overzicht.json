@@ -1,0 +1,72 @@
+{
+    "persoonlijk": {
+        "Vodafone": {
+            "bedrag": 54,
+            "betaald": true
+        },
+        "iCloud": {
+            "bedrag": 1,
+            "betaald": true
+        },
+        "Schenken": {
+            "bedrag": 25,
+            "betaald": true
+        },
+        "Zorgverzekering": {
+            "bedrag": 162,
+            "betaald": true
+        },
+        "Spotify": {
+            "bedrag": 13,
+            "betaald": true
+        },
+        "Ziggo": {
+            "bedrag": 64,
+            "betaald": false
+        },
+        "ING": {
+            "bedrag": 4,
+            "betaald": false
+        },
+        "Fitness": {
+            "bedrag": 46,
+            "betaald": true
+        },
+        "Parkeren": {
+            "bedrag": 25,
+            "betaald": true
+        },
+        "Autoverzekering": {
+            "bedrag": 91,
+            "betaald": false
+        },
+        "Wegenbelasting": {
+            "bedrag": 19,
+            "betaald": true
+        },
+        "F1 TV": {
+            "bedrag": 12,
+            "betaald": false
+        }
+    },
+    "overig": {
+        "Boodschappen": {
+            "bedrag": 250,
+            "betaald": null
+        },
+        "Benzine": {
+            "bedrag": 100,
+            "betaald": null
+        }
+    },
+    "zakelijk": {
+        "Accountant": {
+            "bedrag": 121,
+            "betaald": true
+        },
+        "Microsoft": {
+            "bedrag": 6,
+            "betaald": false
+        }
+    }
+}
