@@ -1,8 +1,7 @@
 To-do list:
 
-1. Code in Main script lezen en logica begrijpen
-2. Voor dit bestand en password_generator github repo maken en pushen (map: portfolio projects) -> beginner projecten ook maar onder map: beginners-projects
-3. Uitgave markeren als betaald (True) via het programma
-4. Betaling ongedaan maken (False)
-5. Case-insensitive matching van uitgavennamen
-6. Automatisch opslaan na elke wijziging
+1. Voor 2 Projects Readme schrijven
+2. Uitgave markeren als betaald (True) via het programma
+3. Betaling ongedaan maken (False)
+4. Case-insensitive matching van uitgavennamen
+5. Automatisch opslaan na elke wijziging
