@@ -44,9 +44,13 @@
             "bedrag": 19,
             "betaald": true
         },
-        "F1 TV": {
+        "F1TV": {
             "bedrag": 12,
-            "betaald": false
+            "betaald": true
+        },
+        "Chatgpt": {
+            "bedrag": 8,
+            "betaald": true
         }
     },
     "overig": {

@@ -366,7 +366,8 @@ def get_default_uitgaven():
         "Spotify": {"bedrag": 13, "betaald": False},
         "Ziggo": {"bedrag": 64, "betaald": False},
         "ING": {"bedrag": 4, "betaald": False},
-        "F1 TV": {"bedrag": 12, "betaald": False}
+        "F1TV": {"bedrag": 12, "betaald": False},
+        "Chatgpt": {"bedrag": 8, "betaald": False},
         "Fitness": {"bedrag": 46, "betaald": False},
         "Parkeren": {"bedrag": 25, "betaald": True},
         "Autoverzekering": {"bedrag": 91, "betaald": False},
