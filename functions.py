@@ -40,43 +40,6 @@ def totale_uitgaven_berekenen(alle_uitgaven):
     return totale_uitgaven
 
 
-def nieuwe_uitgave_toevoegen(huidige_lijst, nieuwe_uitgave):
-    """
-    Voegt een nieuwe uitgave toe aan een bestaande uitgavenlijst.
-
-    Parameters:
-    huidige_lijst (dict): Bestaande dictionary met uitgaven, waarin de keys de uitgaven namen zijn
-    en de values een dictionary met:
-    - 'bedrag' (int of float)
-    - 'betaald' (bool of None)
-    nieuwe_uitgave (dict): Nieuwe uitgave in dezelfde vorm als hierboven.
-
-    Returns:
-    dict: De complete dict inclusief de laatst toegevoegde uitgave.
-    """
-    huidige_lijst.update(nieuwe_uitgave)
-    return huidige_lijst
-
-
-def uitgave_verwijderen(huidige_lijst, te_verwijderen_uitgave):
-    """
-    Verwijdert een uitgave uit een bestaande uitgavenlijst.
-
-    Parameters:
-    huidige_lijst (dict): Bestaande dictionary met uitgaven, waarin de keys de uitgaven namen zijn
-    en de values een dictionary met:
-    - 'bedrag' (int of float)
-    - 'betaald' (bool of None)
-    te_verwijderen_uitgave (str): Naam van uitgave die verwijderd moet worden. Als de uitgave
-    niet bestaat, gebeurt er niets (None).
-
-    Returns:
-    dict: De dictionary na verwijdering van de uitgave.
-    """
-    huidige_lijst.pop(te_verwijderen_uitgave, None)
-    return huidige_lijst
-
-
 def bestand_opslaan(data, bestandsnaam):
     """
     Slaat een dictionary op in een JSON bestand.
@@ -101,6 +64,7 @@ def bestand_laden(bestandsnaam):
     """
     with open(bestandsnaam, "r") as f:
         data = json.load(f)
+
     return data
 
 
@@ -256,6 +220,43 @@ def lijst_keuze(
     return huidige_lijst
 
 
+def nieuwe_uitgave_toevoegen(huidige_lijst, nieuwe_uitgave):
+    """
+    Voegt een nieuwe uitgave toe aan een bestaande uitgavenlijst.
+
+    Parameters:
+    huidige_lijst (dict): Bestaande dictionary met uitgaven, waarin de keys de uitgaven namen zijn
+    en de values een dictionary met:
+    - 'bedrag' (int of float)
+    - 'betaald' (bool of None)
+    nieuwe_uitgave (dict): Nieuwe uitgave in dezelfde vorm als hierboven.
+
+    Returns:
+    dict: De complete dict inclusief de laatst toegevoegde uitgave.
+    """
+    huidige_lijst.update(nieuwe_uitgave)
+    return huidige_lijst
+
+
+def uitgave_verwijderen(huidige_lijst, te_verwijderen_uitgave):
+    """
+    Verwijdert een uitgave uit een bestaande uitgavenlijst.
+
+    Parameters:
+    huidige_lijst (dict): Bestaande dictionary met uitgaven, waarin de keys de uitgaven namen zijn
+    en de values een dictionary met:
+    - 'bedrag' (int of float)
+    - 'betaald' (bool of None)
+    te_verwijderen_uitgave (str): Naam van uitgave die verwijderd moet worden. Als de uitgave
+    niet bestaat, gebeurt er niets (None).
+
+    Returns:
+    dict: De dictionary na verwijdering van de uitgave.
+    """
+    huidige_lijst.pop(te_verwijderen_uitgave, None)
+    return huidige_lijst
+
+
 def uitgave_toevoegen_verwijderen(huidige_lijst):
     """
     Laat de gebruiker een uitgave toevoegen, verwijderen of overslaan
@@ -278,9 +279,11 @@ def uitgave_toevoegen_verwijderen(huidige_lijst):
 
         if actie == 1:
             print("\nUitgave toevoegen gekozen.\n")
-            naam_uitgave = input(
-                "Wat is de naam van de uitgave die je wilt toevoegen? \n"
-            ).title()
+            naam_uitgave = (
+                input("Wat is de naam van de uitgave die je wilt toevoegen? \n")
+                .strip()
+                .lower()
+            )
 
             while True:
                 try:
@@ -307,24 +310,18 @@ def uitgave_toevoegen_verwijderen(huidige_lijst):
             print("\nUitgave verwijderen gekozen.")
 
             while True:
-                naam_uitgave = (
-                    input(
-                        "\nWat is de naam van de uitgave die je wilt verwijderen?: \n"
-                    )
-                    .strip()
-                    .title()
+                naam_uitgave = input(
+                    "\nWat is de naam van de uitgave die je wilt verwijderen?: \n"
+                ).strip()
+
+                gevonden_uitgave = zoek_uitgave_case_insensitive(
+                    huidige_lijst, naam_uitgave
                 )
 
-                if not naam_uitgave.isalpha():
+                if gevonden_uitgave is not None:
+                    uitgave_verwijderen(huidige_lijst, gevonden_uitgave)
                     print(
-                        "Voer een woord in, dus geen getallen. Probeer het opnieuw.\n"
-                    )
-                    continue
-
-                if naam_uitgave in huidige_lijst:
-                    uitgave_verwijderen(huidige_lijst, naam_uitgave)
-                    print(
-                        f"De maandelijkse uitgave {naam_uitgave} is succesvol verwijderd.\n"
+                        f"De maandelijkse uitgave {gevonden_uitgave} is succesvol verwijderd.\n"
                     )
                     break
                 else:
@@ -392,3 +389,119 @@ def get_default_uitgaven():
     }
 
     return alle_uitgaven
+
+
+def zoek_uitgave_case_insensitive(huidige_lijst, naam_uitgave):
+    """
+    Zoekt een uitgave in de huidige lijst zonder rekening te houden met
+    hoofdletters en kleine letters.
+
+    Parameters:
+    huidige_lijst (dict): De uitgavenlijst waarin gezocht wordt.
+    naam_uitgave (str): De naam van de uitgave die gezocht wordt.
+
+    Returns:
+    str | None: De bestaande key uit de dictionary als die gevonden is,
+    anders None.
+    """
+    naam_uitgave = naam_uitgave.strip().lower()
+
+    for bestaande_uitgave in huidige_lijst:
+        if bestaande_uitgave.lower() == naam_uitgave:
+            return bestaande_uitgave
+
+    return None
+
+
+def betaalstatus_aanpassen(huidige_lijst):
+    """
+    Zet de status van één of meerdere uitgaven op betaald of niet betaald.
+
+    Parameter:
+    huidige_lijst (dict): De uitgavenlijst waarin gezocht en aangepast wordt.
+
+    Returns:
+    dict: De aangepaste uitgavenlijst.
+    """
+    while True:
+        keuze = input(
+            "\nWil je uitgaves op betaald of niet betaald zetten?\n"
+            "Kies '1' voor 'ja' of '2' voor 'nee': "
+        ).strip()
+        if keuze == "1":
+            type_uitgave = input(
+                "\nKies '1' voor uitgaven op 'betaald' zetten OF '2' voor uitgaven op 'niet betaald' zetten: "
+            )
+
+            # Bepaal de nieuwe betaalstatus
+            if type_uitgave == "1":
+                actie_status = "betaald"
+                nieuwe_status = True
+
+            elif type_uitgave == "2":
+                actie_status = "niet betaald"
+                nieuwe_status = False
+
+            else:
+                print(
+                    "\nJe kunt alleen kiezen tussen optie '1' of '2'. Probeer het opnieuw."
+                )
+                continue
+
+            naam_uitgave = input(
+                f"Typ de naam van de uitgave die je op {actie_status} wilt zetten: "
+            )
+
+            gevonden_uitgave = zoek_uitgave_case_insensitive(
+                huidige_lijst, naam_uitgave
+            )
+
+            if gevonden_uitgave is not None:
+                huidige_lijst[gevonden_uitgave]["betaald"] = nieuwe_status
+            else:
+                print("\nDeze uitgave bestaat niet. Probeer het opnieuw.")
+                continue
+
+            # Meer uitgaves op betaald of niet betaald zetten
+            while True:
+                verdere_aanpassingen = input(
+                    f"\nWil je nog andere uitgaven op {actie_status} zetten?\n"
+                    "Kies '1' voor 'ja' of '2' voor 'nee': "
+                )
+                if verdere_aanpassingen == "1":
+                    naam_verdere_aanpassingen = input(
+                        f"\nWelke uitgave wil je nog meer op {actie_status} zetten: "
+                    )
+
+                    gevonden_uitgave_extra = zoek_uitgave_case_insensitive(
+                        huidige_lijst, naam_verdere_aanpassingen
+                    )
+
+                    if gevonden_uitgave_extra is not None:
+                        huidige_lijst[gevonden_uitgave_extra]["betaald"] = nieuwe_status
+                        continue
+                    else:
+                        print("\nDeze uitgave bestaat niet. Probeer het opnieuw.")
+                        continue
+
+                elif verdere_aanpassingen == "2":
+                    print("\nKlaar met aanpassen.")
+                    break
+                else:
+                    print(
+                        "\nJe kunt alleen kiezen tussen optie '1' of '2'. Probeer het opnieuw."
+                    )
+                    continue
+
+            return huidige_lijst
+
+        elif keuze == "2":
+            break
+
+        else:
+            print(
+                "\nJe kunt alleen kiezen tussen optie '1' of '2'. Probeer het opnieuw."
+            )
+            continue
+
+    return huidige_lijst

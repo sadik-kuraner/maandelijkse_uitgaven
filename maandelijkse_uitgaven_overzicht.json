@@ -1,74 +1,70 @@
 {
     "persoonlijk": {
-        "Vodafone": {
+        "vodafone": {
             "bedrag": 54,
             "betaald": true
         },
-        "iCloud": {
+        "icloud": {
             "bedrag": 1,
             "betaald": true
         },
-        "Schenken": {
+        "schenken": {
             "bedrag": 25,
             "betaald": true
         },
-        "Zorgverzekering": {
+        "zorgverzekering": {
             "bedrag": 162,
             "betaald": true
         },
-        "Spotify": {
+        "spotify": {
             "bedrag": 13,
             "betaald": true
         },
-        "Ziggo": {
+        "ziggo": {
             "bedrag": 64,
-            "betaald": false
+            "betaald": true
         },
-        "ING": {
+        "ing": {
             "bedrag": 4,
-            "betaald": false
+            "betaald": true
         },
-        "Fitness": {
+        "fitness": {
             "bedrag": 46,
             "betaald": true
         },
-        "Parkeren": {
+        "parkeren": {
             "bedrag": 25,
             "betaald": true
         },
-        "Autoverzekering": {
+        "autoverzekering": {
             "bedrag": 91,
-            "betaald": false
+            "betaald": true
         },
-        "Wegenbelasting": {
+        "wegenbelasting": {
             "bedrag": 19,
             "betaald": true
         },
-        "F1TV": {
-            "bedrag": 12,
+        "chatgpt": {
+            "bedrag": 22,
             "betaald": true
         },
-        "Chatgpt": {
-            "bedrag": 8,
-            "betaald": true
+        "f1tv": {
+            "bedrag": 12,
+            "betaald": false
         }
     },
     "overig": {
-        "Boodschappen": {
+        "boodschappen": {
             "bedrag": 250,
             "betaald": null
         },
-        "Benzine": {
+        "benzine": {
             "bedrag": 100,
             "betaald": null
         }
     },
     "zakelijk": {
-        "Accountant": {
-            "bedrag": 121,
-            "betaald": true
-        },
-        "Microsoft": {
+        "microsoft": {
             "bedrag": 6,
             "betaald": false
         }

@@ -7,6 +7,7 @@ from functions import (
     bestand_opslaan,
     bestand_laden,
     get_default_uitgaven,
+    betaalstatus_aanpassen,
 )
 
 
@@ -45,6 +46,9 @@ def main():
         zakelijke_uitgaven_lijst,
         overige_uitgaven_lijst,
     )
+
+    # Wijzig de betaalstatus van één of meerdere uitgaven
+    huidige_lijst = betaalstatus_aanpassen(huidige_lijst)
 
     # Voeg uitgave toe of verwijder uitgave, afhankelijk van keuze van gebruiker
     huidige_lijst = uitgave_toevoegen_verwijderen(huidige_lijst)
