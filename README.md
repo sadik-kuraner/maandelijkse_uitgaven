@@ -5,14 +5,17 @@ A simple Python application for tracking and managing monthly expenses, organize
 ## Features
 
 - **Expenses by Category**: Manage expenses in three categories: personal, business, and misc
+- **Payment Status**: Mark expenses as paid or unpaid
 - **Add and Remove**: Easily add or remove expenses
 - **Persistent Storage**: Data is saved in JSON format
 - **Auto Load**: Previous data is automatically loaded on startup
+- **Auto Save**: Changes are saved immediately after updating, adding, or removing an expense
 
 ## Installation
 
 ### Requirements
 - Python 3.13 or higher
+- Optional: uv
 
 ### Steps
 
@@ -38,11 +41,17 @@ Start the application with:
 python main.py
 ```
 
+Or with uv:
+```bash
+uv run python main.py
+```
+
 The app will guide you step by step through the process:
 1. Select a category (personal, business, or misc)
-2. Choose whether you want to add or remove an expense
-3. Enter the details
-4. Your data is automatically saved
+2. Choose whether you want to update the payment status
+3. Choose whether you want to add or remove an expense
+4. Enter the details
+5. Your data is automatically saved after each change
 
 ## Project Structure
 
@@ -53,7 +62,8 @@ maandelijkse_uitgaven/
 ├── maandelijkse_uitgaven_overzicht.json # Saved data
 ├── README.md                            # This file
 ├── pyproject.toml                       # Project configuration
-└── notities.txt                         # Notes
+├── uv.lock                              # uv lock file
+└── requirements.txt                     # Project requirements
 ```
 
 ## Author
