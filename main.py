@@ -48,10 +48,14 @@ def main():
     )
 
     # Wijzig de betaalstatus van één of meerdere uitgaven
-    huidige_lijst = betaalstatus_aanpassen(huidige_lijst)
+    huidige_lijst = betaalstatus_aanpassen(
+        huidige_lijst, maandelijkse_uitgaven, "maandelijkse_uitgaven_overzicht.json"
+    )
 
     # Voeg uitgave toe of verwijder uitgave, afhankelijk van keuze van gebruiker
-    huidige_lijst = uitgave_toevoegen_verwijderen(huidige_lijst)
+    huidige_lijst = uitgave_toevoegen_verwijderen(
+        huidige_lijst, maandelijkse_uitgaven, "maandelijkse_uitgaven_overzicht.json"
+    )
 
     # Sla het bestand veilig op
     bestand_opslaan(maandelijkse_uitgaven, "maandelijkse_uitgaven_overzicht.json")

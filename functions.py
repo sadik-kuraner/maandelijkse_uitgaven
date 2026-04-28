@@ -257,13 +257,15 @@ def uitgave_verwijderen(huidige_lijst, te_verwijderen_uitgave):
     return huidige_lijst
 
 
-def uitgave_toevoegen_verwijderen(huidige_lijst):
+def uitgave_toevoegen_verwijderen(huidige_lijst, maandelijkse_uitgaven, bestandsnaam):
     """
     Laat de gebruiker een uitgave toevoegen, verwijderen of overslaan
     in de uitgavenlijst die is gekozen in de functie 'lijst_keuze'.
 
-    Parameter:
+    Parameters:
     huidige_lijst (dict): de uitgavenlijst van de gekozen categorie.
+    maandelijkse_uitgaven (dict): Het volledige overzicht met alle categorieën dat opgeslagen wordt.
+    bestandsnaam (str): naam van het bestand waar je het wilt opslaan.
 
     Returns:
     huidige_lijst (dict): de bijgewerkte uitgavenlijst met eventuele toevoegingen
@@ -302,6 +304,7 @@ def uitgave_toevoegen_verwijderen(huidige_lijst):
                 huidige_lijst,
                 {naam_uitgave: {"bedrag": bedrag_uitgave, "betaald": False}},
             )
+            bestand_opslaan(maandelijkse_uitgaven, bestandsnaam)
             print(
                 f"De maandelijkse uitgave {naam_uitgave} met bedrag €{bedrag_uitgave} is toegevoegd aan de uitgaven lijst.\n"
             )
@@ -320,6 +323,7 @@ def uitgave_toevoegen_verwijderen(huidige_lijst):
 
                 if gevonden_uitgave is not None:
                     uitgave_verwijderen(huidige_lijst, gevonden_uitgave)
+                    bestand_opslaan(maandelijkse_uitgaven, bestandsnaam)
                     print(
                         f"De maandelijkse uitgave {gevonden_uitgave} is succesvol verwijderd.\n"
                     )
@@ -413,12 +417,15 @@ def zoek_uitgave_case_insensitive(huidige_lijst, naam_uitgave):
     return None
 
 
-def betaalstatus_aanpassen(huidige_lijst):
+def betaalstatus_aanpassen(huidige_lijst, maandelijkse_uitgaven, bestandsnaam):
     """
     Zet de status van één of meerdere uitgaven op betaald of niet betaald.
+    Slaat op na iedere wijziging.
 
-    Parameter:
+    Parameters:
     huidige_lijst (dict): De uitgavenlijst waarin gezocht en aangepast wordt.
+    maandelijkse_uitgaven (dict): Het volledige overzicht met alle categorieën dat opgeslagen wordt.
+    bestandsnaam (str): naam van het bestand waar je het wilt opslaan.
 
     Returns:
     dict: De aangepaste uitgavenlijst.
@@ -458,6 +465,7 @@ def betaalstatus_aanpassen(huidige_lijst):
 
             if gevonden_uitgave is not None:
                 huidige_lijst[gevonden_uitgave]["betaald"] = nieuwe_status
+                bestand_opslaan(maandelijkse_uitgaven, bestandsnaam)
             else:
                 print("\nDeze uitgave bestaat niet. Probeer het opnieuw.")
                 continue
@@ -479,6 +487,7 @@ def betaalstatus_aanpassen(huidige_lijst):
 
                     if gevonden_uitgave_extra is not None:
                         huidige_lijst[gevonden_uitgave_extra]["betaald"] = nieuwe_status
+                        bestand_opslaan(maandelijkse_uitgaven, bestandsnaam)
                         continue
                     else:
                         print("\nDeze uitgave bestaat niet. Probeer het opnieuw.")
